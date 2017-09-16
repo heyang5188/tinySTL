@@ -17,7 +17,6 @@ public:
 	String() : sz(0), p(nullptr) { }
 	
 	String(String &&s) noexcept : sz(s.size()), p(s.p) {
-		std::cout << "move constructor has been called!" << std::endl;
 		s.sz = 0; s.p = nullptr; }
 	String &operator=(const String &);
 	String(const char *cp) :

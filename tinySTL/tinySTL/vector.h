@@ -3,42 +3,42 @@
 
 #include <algorithm>
 #include <initializer_list>
-
+namespace herb{
 template<typename T>
-class Vector {
+class vector {
 public:
-	explicit Vector(int initSize = 0) :theSize(initSize),
+	explicit vector(int initSize = 0) :theSize(initSize),
 		theCapacity(initSize + SPARE_CAPACITY)
 	{	object = new T[theCapacity];	}
-	Vector(const Vector&rhs) :theSize(rhs.theSize), theCapacity(rhs.theCapacity), object(nullptr)
+	vector(const vector&rhs) :theSize(rhs.theSize), theCapacity(rhs.theCapacity), object(nullptr)
 	{
 		object = new T[theCapacity];
 		for (int k = 0; k < theSize; ++k)
 			object[k] = rhs.object[k];
 		}
-	Vector(const std::initializer_list<T> il):theSize(il.size()),theCapacity(il.size()), object(nullptr)
+	vector(const std::initializer_list<T> il):theSize(il.size()),theCapacity(il.size()), object(nullptr)
 	{
 		int i = 0;
 		object = new T[theSize];
 		for (auto x : il)
 			object[i++] = x;
 	}
-	Vector & operator=(const Vector&rhs)
+	vector & operator=(const vector&rhs)
 	{
-		Vector newdata = rhs;
+		vector newdata = rhs;
 		std::swap(*this, newdata);
 		return *this;
 	}
-	~Vector() {
+	~vector() {
 		delete[] object;
 	}
-	Vector(Vector &&rhs):theSize(rhs.theSize),theCapacity(rhs.theCapacity),object(rhs.object)
+	vector(vector &&rhs):theSize(rhs.theSize),theCapacity(rhs.theCapacity),object(rhs.object)
 	{
 		rhs.object = nullptr;
 		rhs.theCapacity = 0;
 		rhs.theSize = 0;
 	}
-	Vector & operator=(Vector &&rhs)
+	vector & operator=(vector &&rhs)
 	{
 		std::swap(theSize, rhs.theSize);
 		std::swap(theCapacity, rhs.theCapacity);
@@ -118,6 +118,6 @@ private:
 	int theCapacity;
 	T * object;
 };
-
+}
 
 #endif // !VECTOR_H
