@@ -50,7 +50,7 @@ public:
 		{
 			return current->data;
 		}
-		const_iterator(Node *p):current(p)
+		const_iterator(Node *p):current(p)sd
 		{}
 		friend class list<T>;
 	};
