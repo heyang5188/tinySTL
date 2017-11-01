@@ -72,3 +72,36 @@ void BinarySearchTree::remove(const Comparable &x,BinaryNode *& t)
         delete oldNode;
     }
 }
+
+void BinarySearchTree::~BinarySearchTree()
+{
+    makeEmpty();
+}
+
+void BinarySearchTree::makeEmpty()
+{
+    if(t!=nullptr)
+    {
+        makeEmpty(t->left);
+        makeEmpty(t->right);
+        delete t;
+    }
+    t = nullptr;
+}
+
+void BinarySearchTree::BinarySearchTree(const BinarySearchTree & rhs) : root { nullptr }
+{
+    root = clone (rhs.root);
+}
+
+BinaryNode * BinarySearchTree::clone(BinaryNode *t) const
+{
+    if(t==nullptr)
+        return nullptr;
+    else
+        return new BinaryNode { t->element,clone(t->left),clone(t->right) };
+}
+
+git config --global user.email "1015485344@qq.com"
+
+git config --global user.name "Herb"
